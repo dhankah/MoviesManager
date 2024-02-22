@@ -1,25 +1,18 @@
-import logo from './logo.svg';
-import './App.css';
+import Counter from './CounterComponent.js'
+import SearchComponent from './SearchComponent.js'
+import GenreSelectComponent from './GenreSelectComponent.js'
 
 function App() {
+  const initialValue = 0;
+  const values = ['Option 1', 'Option 2', 'Option 3'];
+  const current = 'Option 1';
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+        <Counter initialValue={initialValue} name="Counter" />
+        <SearchComponent callBack={(input) => console.log("Search is being executed " + input)} defaultValue="What do you want to watch" />
+        <GenreSelectComponent genresList={values} currentGenreInput = {current} callBack={(input) => console.log("Genre selected " + input)}/>
     </div>
-  );
+  )
 }
 
 export default App;
