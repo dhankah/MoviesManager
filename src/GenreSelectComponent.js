@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
 
-const GenreSelectComponent = ({genresList, currentGenreInput, callBack}) => {
+const GenreSelectComponent = ({genresList, currentGenreInput, onSelect}) => {
     const [currentGenre, setCurrentGenre] = useState(currentGenreInput);
     const handleSelect = (genre) => {
-        callBack(genre);
+        onSelect(genre);
         setCurrentGenre(genre);
     };
 

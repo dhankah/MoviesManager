@@ -1,23 +1,23 @@
 import React, {useState} from 'react';
 
-const SearchComponent = ({callBack, defaultValue}) => {
+const SearchComponent = ({onSearch, defaultValue}) => {
     const [inputValue, setInputValue] = useState(defaultValue);
 
     const handleSearchOnEnter = (event) => {
         if (event.key === 'Enter') {
-            callBack(inputValue);
+            onSearch(inputValue);
         }
     };
 
-  const handleSearch = () => {
-        callBack(inputValue);
-  };
+    const handleSearch = () => {
+        onSearch(inputValue);
+    };
 
 
      return (
          <div>
              <input type = "text" value = {inputValue} onChange={(e) => setInputValue(e.target.value)} onKeyDown={handleSearchOnEnter}/>
-             <button onClick={handleSearch}>Search</button>
+             <button onClick={handleSearch} class = 'searchBtn'>Search</button>
          </div>
          )
 }
