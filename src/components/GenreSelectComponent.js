@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import '../styles/GenreSelectComponent.css';
 
 const GenreSelectComponent = ({genresList, currentGenreInput, onSelect}) => {
     const [currentGenre, setCurrentGenre] = useState(currentGenreInput);
@@ -8,7 +9,6 @@ const GenreSelectComponent = ({genresList, currentGenreInput, onSelect}) => {
     };
 
      return (
-         <div>
             <ul>
             {genresList.map((genre) => (
                  <li key={genre}
@@ -17,7 +17,6 @@ const GenreSelectComponent = ({genresList, currentGenreInput, onSelect}) => {
                  >{genre}</li>
              ))}
             </ul>
-         </div>
      )
 }
 

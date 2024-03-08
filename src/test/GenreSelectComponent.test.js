@@ -6,11 +6,13 @@ test('renders values from props', () => {
     const current = values[0];
     const mockOnChange = jest.fn();
 
-    render(<GenreSelectComponent genresList={values} currentGenreInput = {current} onSelect={mockOnChange}></GenreSelectComponent>);
+    const {container} = render(<GenreSelectComponent genresList={values} currentGenreInput = {current} onSelect={mockOnChange}></GenreSelectComponent>);
     values.map(genre => {
         const renderedValue = screen.getByText(genre);
         expect(renderedValue).toBeInTheDocument();
     })
+    const listItems = container.querySelectorAll('li');
+    expect(listItems.length).toBe(values.length);
   });
 
   test('should highlight selected genre', () => {

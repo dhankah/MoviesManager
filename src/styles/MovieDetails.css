@@ -1,0 +1,55 @@
+.caption {
+    color: white;
+    display: flex;
+    justify-content: space-between;
+}
+
+.redCaptions {
+    color: #F65261;
+    display: flex;
+}
+
+.duration {
+  margin-left: 20px;
+}
+
+.detailsContainer  {
+    background-color: #232323;
+    display: flex;
+    padding-top: 20px;
+  }
+  
+  .image {
+    width: 200px;
+    margin-top: -10px;
+    margin-bottom: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+  
+  .textFields {
+    margin-top: -10px;
+    display: inline;
+  }
+
+.rating {
+    margin-top:10px;
+    border-width: 1px;;
+    display: inline-block;
+    width: 30px; 
+    height: 30px;
+    border-radius: 50%; 
+    text-align: center;
+    line-height: 30px;
+    border-style: solid;
+    border-color: #8C8C8C;
+    border-radius: 50%;
+}  
+
+.genre {
+    color: #555555;
+}
+
+p {
+  font-family: Arial, Helvetica, sans-serif;
+}
