@@ -1,6 +1,6 @@
-import Counter from './CounterComponent.js'
-import SearchComponent from './SearchComponent.js'
-import GenreSelectComponent from './GenreSelectComponent.js'
+import CounterComponent from './components/CounterComponent.js'
+import SearchComponent from './components/SearchComponent.js'
+import GenreSelectComponent from './components/GenreSelectComponent.js'
 import './App.css';
 
 function App() {
@@ -10,7 +10,7 @@ function App() {
   return (
     <div class='root'>
         <div>
-            <Counter initialValue={initialValue} name="Counter" />
+            <CounterComponent initialValue={initialValue} />
         </div>
         <div>
             <SearchComponent onSearch={(input) => console.log("Search is being executed " + input)} defaultValue="What do you want to watch?" />
