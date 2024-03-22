@@ -54,10 +54,8 @@ function MovieListComponent() {
         throw new Error('Network response was not ok');
       }
       const data = await response.json();
-      console.log("databig: ", data);
 
       setSearchResults(data.data);
-      console.log("results are cooked: ", searchResults);
     } catch (error) {
       console.error('Error fetching search results:', error);
     }
