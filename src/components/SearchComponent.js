@@ -1,24 +1,29 @@
 import React, {useState} from 'react';
 import '../styles/Search.css';
 
-const SearchComponent = ({onSearch, defaultValue}) => {
-    const [inputValue, setInputValue] = useState(defaultValue);
+const SearchComponent = ({searchQuery, onSearchSubmit}) => {
+    const defaultValue = 'What do you want to watch';
+    const [searchText, setSearchText] = useState('');
 
-    const handleSearchOnEnter = (event) => {
-        if (event.key === 'Enter') {
-            onSearch(inputValue);
-        }
-    };
+    const handleChange = (event) => {
+    setSearchText(event.target.value);
+  };
 
-    const handleSearch = () => {
-        onSearch(inputValue);
-    };
+  const handleSearchOnEnter = (event) => {
+    if (event.key === 'Enter') {
+      handleSubmit();
+    }
+  };
+
+  const handleSubmit = () => {
+    onSearchSubmit(searchText, searchQuery);
+  };
 
 
      return (
          <div class='searchContainer'>
-             <input type = "text" value = {inputValue} onChange={(e) => setInputValue(e.target.value)} onKeyDown={handleSearchOnEnter}/>
-             <button onClick={handleSearch} class='searchBtn'>Search</button>
+             <input type = "text" placeholder = {defaultValue} onChange={handleChange} onKeyDown={handleSearchOnEnter}/>
+             <button onClick={handleSubmit} class='searchBtn'>Search</button>
          </div>
          )
 }
