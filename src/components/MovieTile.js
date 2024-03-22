@@ -4,7 +4,6 @@ import '../styles/MovieTile.css';
 export default function MovieTile ({props, onClick}) {
   
   const handleTileClick = () => {
-    console.log("proppo", props);
     onClick(props);
 };
 
