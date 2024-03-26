@@ -6,7 +6,7 @@ export default {
   component: Dialog,
 };
 
-var movieInfo = {
+const movieInfo = {
     title: "Scary Fog",
     url: "www.movie.com",
     genres: "Drama",

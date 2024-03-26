@@ -12,7 +12,7 @@ function App() {
   const initialValue = 0;
   const values = ['All', 'Documentary', 'Comedy', 'Horror', 'Crime'];
   const current = values[0];
-  var movieInfo = {
+  const movieInfo = {
     title: "Scary Fog",
     url: "www.movie.com",
     genres: "Drama",
@@ -30,7 +30,6 @@ function App() {
             <MoviesList/>
             <SortControl currentSortOptionInput="Title" handleSelect={(input) => console.log("Sorting option: " + input)}/>
             <Dialog onClose={() => console.log("Closing")} title={"Edit"} children={<MovieForm movieInfo={movieInfo}/>}>
-
             </Dialog>
     </div>
   )
