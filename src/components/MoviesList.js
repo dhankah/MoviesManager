@@ -1,32 +1,37 @@
 import React from 'react';
 import MovieTile from './MovieTile.js';
+import '../styles/MoviesList.css';
 
-export default function MoviesList (props) {
+const MoviesList = ({movies, onSelect}) => {
 
-    let movies = [
-        {
-            imageUrl: 'https://images.unsplash.com/photo-1611419010196-a360856fc42f',
-            title: 'Scary Fog',
-            year: '2003',
-            genres: 'Horror',
-            id: 1
-        }
-    ]
+
+     const splitMovieList = (movies, rowSize) => {
+          const movieRows = [];
+          for (let i = 0; i < movies.length; i += rowSize) {
+            movieRows.push(movies.slice(i, i + rowSize));
+          }
+          return movieRows;
+        };
+        
+        const movieRows = splitMovieList(movies, 3);
 
      return (
         <>
-        {movies.map((movie) => (
-            <MovieTile imageUrl={movie.imageUrl}
-            title = {movie.title}
-            releaseYear = {movie.year}
-            genres = {movie.genres}
-            onSelect= {(arg) => console.log(arg)}
-            key = {movie.id}/>
-             ))}
-        </>
+          {movieRows.map((row) => (
+               <div>
+                    {row.map((movie) => (
+                    <MovieTile 
+                    props={movie}
+                    onClick = {onSelect}/>
+                    ))}
+               </div>
+          ))}
+          </>
      )
 }
 
 MovieTile.defaultProps = {
   movieName: "Movie Title"
 }
+
+export default MoviesList;

@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import '../styles/SortControl.css';
 
 const SortControl = ({currentSortOptionInput, handleSelect}) => {
-    const sortOptions = ["Release Date", "Title"]
+    const sortOptions = new Map([["release_date", "Release Date"], ["title", "Title"]]);
 
     const [currentSortOption, setCurrentSortOption] = useState(currentSortOptionInput);
 
@@ -17,9 +17,9 @@ const SortControl = ({currentSortOptionInput, handleSelect}) => {
          <div class='sortContainer'>
            <p>Sort by</p>
            <select value={currentSortOption} onChange={sortMovies} data-testid='select'>
-           {sortOptions.map((sortOption) => (
-                 <option value={sortOption}
-                 >{sortOption}</option>
+           {Array.from(sortOptions.entries()).map(([key, value]) =>  (
+                 <option value={key}
+                 >{value}</option>
              ))}
             </select>
          </div>
