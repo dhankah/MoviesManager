@@ -5,18 +5,18 @@ const MovieDetails = ({imageUrl, movieName, releaseYear, genres, rating, duratio
 
      return (
          <div class = 'detailsContainer'>
-           <img src = {imageUrl} class = 'image'/>
+           <img src = {imageUrl} class = 'image' alt = 'Movie Poster'/>
            <div class = 'textFields'>
-           <div class = 'caption'>
-           <p class = 'name'>{movieName}</p>
-           <p class='rating'> {rating}</p>
-           </div>
-           <p class='genre'>{genres}</p>
-           <div class = 'redCaptions'>
-           <p>{releaseYear}</p> 
-           <p class = 'duration'>{duration}</p>
-           </div>
-           <p class ='genre'>{description}</p>
+              <div class = 'caption'>
+                  <p class = 'name'>{movieName}</p>
+                  <p class='rating'> {rating}</p>
+              </div>
+              <p class='genre'>{genres}</p>
+              <div class = 'redCaptions'>
+                  <p>{releaseYear}</p> 
+                  <p class = 'duration'>{duration}</p>
+              </div>
+              <p class ='genre'>{description}</p>
            </div>
          </div>
      )
