@@ -1,7 +1,7 @@
 import React from 'react';
 import MovieTile from './MovieTile.js';
 
-export default function MoviesList ({movies, onSelect}) {
+const MoviesList = ({movies, onSelect}) => {
 
      return (
         <>
@@ -16,3 +16,5 @@ export default function MoviesList ({movies, onSelect}) {
 MovieTile.defaultProps = {
   movieName: "Movie Title"
 }
+
+export default MoviesList;

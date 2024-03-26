@@ -5,7 +5,7 @@ const MovieDetails = ({movie, onButtonClick}) => {
 
      return (
          <div class = 'detailsContainer'>
-           <img src = {movie.poster_path} class = 'image'/>
+           <img src = {movie.poster_path} class = 'image' alt = 'Movie Poster'/>
            <div class = 'textFields'>
            <button onClick={onButtonClick}>Back to search</button>
            <div class = 'caption'>

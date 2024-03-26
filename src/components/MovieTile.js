@@ -10,7 +10,7 @@ export default function MovieTile ({props, onClick}) {
 
      return (
          <div class = 'container' onClick={handleTileClick} data-testid='movie-tile'>
-           <img src = {props.poster_path}/>
+           <img src = {props.poster_path} alt = 'Movie Poster'/>
            <br />
            <div class = 'caption'>
            <p class = 'movie'>{props.title}</p>
