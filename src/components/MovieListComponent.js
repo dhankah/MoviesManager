@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 
-import SearchComponent from './SearchComponent.js'
+import Header from './Header.js'
 import MoviesList from './MoviesList.js'
 import GenreSelectComponent from './GenreSelectComponent.js'
 import SortControl from './SortControl.js'
@@ -84,14 +84,12 @@ const handleBackToSearch = (movie) => {
     setSelectedMovie(null);
 };
 
-
- 
     return (
         <div class='root'>    
         {selectedMovie !== null ? (
                 <MovieDetails movie={selectedMovie} onButtonClick={handleBackToSearch}/>
             ) : (
-                <SearchComponent 
+                <Header 
                 searchQuery={searchQuery} 
                 onSearchSubmit={handleSearchSubmit}  
                 />
