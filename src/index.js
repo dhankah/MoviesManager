@@ -4,11 +4,18 @@ import './index.css';
 import MovieListComponent from './components/MovieListComponent.js'
 
 import reportWebVitals from './reportWebVitals';
+import {createBrowserRouter, RouterProvider} from 'react-router-dom'
+
+const router = createBrowserRouter([{
+    path: "/",
+    element: <MovieListComponent/>,
+}]);
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <MovieListComponent />
+    <RouterProvider router={router} />
   </React.StrictMode>
 );
 
