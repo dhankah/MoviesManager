@@ -118,11 +118,8 @@ const initializeStateFromSearchParams = () => {
 
     return (
         <div class='root'>   
-                <Outlet/>      
-                <Header 
-                searchQuery={searchQuery} 
-                onSearchSubmit={handleSearchSubmit}  
-                />      
+                <Outlet context={[searchQuery, handleSearchSubmit]} />      
+   
                 <SortControl currentSortOptionInput="Title" handleSelect={handleSortCriterionChange}></SortControl>
                 <GenreSelectComponent genresList={genres} onSelect={handleActiveGenreChange}></GenreSelectComponent>
                 {searchResults !== null && (
