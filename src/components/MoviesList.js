@@ -1,8 +1,11 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+
 import MovieTile from './MovieTile.js';
+
 import '../styles/MoviesList.css';
 
-const MoviesList = ({movies, onSelect}) => {
+const MoviesList = ({movies}) => {
 
 
      const splitMovieList = (movies, rowSize) => {
@@ -20,13 +23,16 @@ const MoviesList = ({movies, onSelect}) => {
           {movieRows.map((row) => (
                <div>
                     {row.map((movie) => (
+                          <Link to={`${movie.id}`}>
                     <MovieTile 
                     props={movie}
-                    onClick = {onSelect}/>
+                    />
+                      </Link>
                     ))}
                </div>
           ))}
           </>
+        
      )
 }
 

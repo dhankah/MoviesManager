@@ -1,11 +1,10 @@
 import React, {useState, useEffect} from 'react';
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams, Outlet, useNavigate } from "react-router-dom";
 
 import Header from './Header.js'
 import MoviesList from './MoviesList.js'
 import GenreSelectComponent from './GenreSelectComponent.js'
 import SortControl from './SortControl.js'
-import MovieDetails from './MovieDetails.js'
 
 function MovieListComponent() {
     const [searchParams, setSearchParams] = useSearchParams();
@@ -16,6 +15,8 @@ function MovieListComponent() {
     const [selectedMovie, setSelectedMovie] = useState(null);
     const genres = ['All', 'Documentary', 'Comedy', 'Horror', 'Crime'];
     const [activeGenre, setActiveGenre] = useState('');
+    const navigate = useNavigate();
+
 
 
 const initializeStateFromSearchParams = () => {
@@ -40,7 +41,6 @@ const initializeStateFromSearchParams = () => {
     }
 
   };
-
 
     const handleSearchSubmit = (searchQueryFromInput) => {
       setSearchParams({ searchQuery: searchQueryFromInput});
@@ -111,32 +111,24 @@ const initializeStateFromSearchParams = () => {
       setActiveGenre(genre);
     };
 
-    const handleMovieClick = (movie) => {
-      const clickedResult = searchResults.find(result => result.id === movie.id);
-      setSelectedMovie(clickedResult);
-    };
 
     const handleBackToSearch = (movie) => {  
       setSelectedMovie(null);
     };
 
     return (
-        <div class='root'>    
-        {selectedMovie !== null ? (
-                <MovieDetails movie={selectedMovie} onButtonClick={handleBackToSearch}/>
-            ) : (
+        <div class='root'>   
+                <Outlet/>      
                 <Header 
                 searchQuery={searchQuery} 
                 onSearchSubmit={handleSearchSubmit}  
-                />
-            )}    
-                
+                />      
                 <SortControl currentSortOptionInput="Title" handleSelect={handleSortCriterionChange}></SortControl>
                 <GenreSelectComponent genresList={genres} onSelect={handleActiveGenreChange}></GenreSelectComponent>
                 {searchResults !== null && (
                 <>
                  <p>{searchResults.length} movies found </p> 
-                 <MoviesList movies = {searchResults} onSelect = {handleMovieClick}></MoviesList>
+                 <MoviesList movies = {searchResults} ></MoviesList>
                 </>)}
         
         </div>

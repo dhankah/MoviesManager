@@ -1,11 +1,8 @@
 import React from 'react';
 import '../styles/MovieTile.css';
 
-export default function MovieTile ({props, onClick}) {
+export default function MovieTile ({props}) {
   
-  const handleTileClick = () => {
-    onClick(props);
-  };
 
   const parseReleaseYear = (releaseDate) => {
     return releaseDate.substring(0, 4);
@@ -15,9 +12,8 @@ export default function MovieTile ({props, onClick}) {
     return genres.join(', ');
 }
 
-
   return (
-       <div class = 'container' onClick={handleTileClick} data-testid='movie-tile'>
+       <div class = 'container' data-testid='movie-tile'>
           <img src = {props.poster_path} alt = 'Movie Poster'/>
           <br />
           <div class = 'caption'>
