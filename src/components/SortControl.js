@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import '../styles/SortControl.css';
 
 const SortControl = ({currentSortOptionInput, handleSelect}) => {
-    const sortOptions = new Map([["release_date", "Release Date"], ["title", "Title"]]);
+    const sortOptions = new Map([["title", "Title"], ["release_date", "Release Date"]]);
 
     const [currentSortOption, setCurrentSortOption] = useState(currentSortOptionInput);
 

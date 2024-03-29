@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import { useSearchParams, Outlet, useNavigate } from "react-router-dom";
 
-import Header from './Header.js'
+import Fetch from '../services/Fetch.js'
 import MoviesList from './MoviesList.js'
 import GenreSelectComponent from './GenreSelectComponent.js'
 import SortControl from './SortControl.js'
@@ -53,12 +53,10 @@ const initializeStateFromSearchParams = () => {
     }, []);
 
     useEffect(() => {
-      console.log("SEARCH QUERY");
       if (searchQuery !== '') {
-        console.log("calling with " + searchQuery)
-        fetchData(`http://localhost:4000/movies?search=${searchQuery}&searchBy=title`);
+        fetchData2(`movies?search=${searchQuery}&searchBy=title&sortBy=${sortCriterion}&sortOrder=asc`);
       }
-
+    
     }, [searchQuery]);
 
 
@@ -66,9 +64,9 @@ const initializeStateFromSearchParams = () => {
       console.log("SORT");
       if (sortCriterion !== '') {
         console.log("look " + sortCriterion);
-        setSearchParams({ searchQuery: searchQuery, sortCriterion: sortCriterion});
+        setSearchParams({ searchQuery: searchQuery, sortCriterion: sortCriterion, genre: activeGenre});
 
-        fetchData(`http://localhost:4000/movies?search=${searchQuery}&sortBy=${sortCriterion}&sortOrder=asc&searchBy=title`);
+        fetchData2(`movies?search=${searchQuery}&sortBy=${sortCriterion}&sortOrder=asc&filter=${activeGenre}&searchBy=title`);
       }
 
     }, [sortCriterion]);
@@ -79,6 +77,11 @@ const initializeStateFromSearchParams = () => {
       setSortCriterion(sortCriterion);
     };
 
+
+    const fetchData2 = async (url) => {
+      const data = await Fetch(url);
+      setSearchResults(data.data);
+    }
 
     const fetchData = async (url) => {
       try {
@@ -97,13 +100,12 @@ const initializeStateFromSearchParams = () => {
     useEffect(() => {
       console.log("GENRES")
       if (activeGenre == 'All') {
-          fetchData(`http://localhost:4000/movies`);    
-          setSearchParams({ genre: activeGenre});
+        fetchData2(`movies?search=${searchQuery}&sortBy=${sortCriterion}&searchBy=title&sortOrder=asc`);    
+        setSearchParams({ searchQuery: searchQuery, genre: activeGenre});
       } else if (genres.includes(activeGenre)){
-          fetchData(`http://localhost:4000/movies?search=${activeGenre}&searchBy=genres`);
-          setSearchParams({ genre: activeGenre});
-      }
-      
+        fetchData2(`movies?search=${searchQuery}&sortBy=${sortCriterion}&searchBy=title&sortOrder=asc&filter=${activeGenre}`);
+        setSearchParams({ searchQuery: searchQuery, genre: activeGenre});
+      } 
 
     }, [activeGenre]);
 
