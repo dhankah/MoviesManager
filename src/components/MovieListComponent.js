@@ -90,7 +90,7 @@ const initializeStateFromSearchParams = () => {
 
 
     return (
-        <div class='root'>   
+        <div class='root' data-testid='movieList'>   
                 <Outlet context={[searchQuery, handleSearchSubmit]} />      
    
                 <SortControl currentSortOptionInput="Title" handleSelect={handleSortCriterionChange}></SortControl>

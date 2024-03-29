@@ -1,40 +1,38 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import SearchComponent from '../components/SearchComponent.js';
+import { useOutletContext } from 'react-router-dom'; 
 
-test('renders value from props', () => {
-    const searchValue = "Search!";
-    const mockOnChange = jest.fn();
 
-    render(<SearchComponent defaultValue = {searchValue} onSearch = {mockOnChange}></SearchComponent>);
-   
-    const renderedValue = screen.getByDisplayValue(searchValue)
-    expect(renderedValue).toBeInTheDocument();
-  });
+const query = 'What do you want to watch';
+
+jest.mock("react-router-dom", () => ({
+  ...jest.requireActual("react-router-dom"),
+  useOutletContext: () => ['query', jest.fn]
+}));
 
 test('calls onChange on click', () => {
-    const initialValue = "Search!";
-    const searchValue = "Good movies";
+    const searchValue = 'Good movies';
 
-    const mockOnChange = jest.fn();
-    const {getByRole} = render(<SearchComponent defaultValue = {initialValue} onSearch = {mockOnChange}></SearchComponent>);
+    const {getByRole} = render(<SearchComponent/>);
     
-    const inputNode = screen.getByDisplayValue(initialValue)
+    const inputNode = screen.getByPlaceholderText(query)
 
-    fireEvent.change(inputNode, { target: { value: searchValue } });
+    fireEvent.change(inputNode, { target: { 
+    value: searchValue } });
     fireEvent.click(getByRole('button'));
+    
 
-    expect(mockOnChange).toHaveBeenCalledWith(searchValue);
+    const { handleSearchSubmit } = useOutletContext();
+
+  expect(handleSearchSubmit).toHaveBeenCalledWith(searchValue);
   });
   
   test('calls onChange on enter', () => {
-    const initialValue = "Search!";
-    const searchValue = "Good movies";
+    const searchValue = 'Good movies';
 
-    const mockOnChange = jest.fn();
-    render(<SearchComponent defaultValue = {initialValue} onSearch = {mockOnChange}></SearchComponent>);
+     render(<SearchComponent/>);
     
-    const inputNode = screen.getByDisplayValue(initialValue)
-    
+    const inputNode = screen.getByPlaceholderText(query)
     inputNode.focus();
     fireEvent.change(inputNode, { target: { value: searchValue } });
     fireEvent.keyDown(inputNode, {
@@ -43,5 +41,7 @@ test('calls onChange on click', () => {
         keyCode: 13,
         charCode: 13});
 
-    expect(mockOnChange).toHaveBeenCalledWith(searchValue);
+    const [, handleSearchSubmit] = useOutletContext();
+
+    expect(handleSearchSubmit).toHaveBeenCalledWith(searchValue);
   });

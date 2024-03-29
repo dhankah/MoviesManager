@@ -19,6 +19,7 @@ const SortControl = ({currentSortOptionInput, handleSelect}) => {
            <select value={currentSortOption} onChange={sortMovies} data-testid='select'>
            {Array.from(sortOptions.entries()).map(([key, value]) =>  (
                  <option value={key}
+                 key={key}
                  >{value}</option>
              ))}
             </select>

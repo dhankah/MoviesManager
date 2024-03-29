@@ -24,9 +24,9 @@ const SearchComponent = () => {
   };
 
   return (
-      <div class='searchContainer'>
-          <input type = "text" placeholder = {defaultValue} onChange={handleChange} onKeyDown={handleSearchOnEnter}/>
-          <button onClick={handleSubmit} class='searchBtn'>Search</button>
+      <div className='searchContainer'>
+          <input type = "text" placeholder = {defaultValue} onChange={handleChange} onKeyDown={handleSearchOnEnter} data-testid='searchField'/>
+          <button onClick={handleSubmit} className='searchBtn'>Search</button>
       </div>
        )
 }

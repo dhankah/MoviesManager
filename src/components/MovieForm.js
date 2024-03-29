@@ -11,8 +11,8 @@ const MovieForm = ({movieInfo = {}}) => {
     const genresList = ["Horror", "Drama"]
 
      return (
-         <div class = 'movieForm'>
-           <div class="column">
+         <div className = 'movieForm'>
+           <div className="column">
            <p>movieTitle</p>
            <input type = "text" value = {movieInfo.title}/>
 
@@ -20,14 +20,14 @@ const MovieForm = ({movieInfo = {}}) => {
            <input type = "text" value = {movieInfo.url}/>
 
            <p>genre</p>
-           <select class = 'genreSelect' value={selectedGenre} data-testid='select' onChange={handleGenreChange}>
+           <select className = 'genreSelect' value={selectedGenre} data-testid='select' onChange={handleGenreChange}>
            {genresList.map((genre) => (
                  <option value={genre}
                  >{genre}</option>
              ))}
             </select>
            </div> 
-           <div class="column">
+           <div className="column">
            <p>releaseYear</p>
            <input type = "text" value = {movieInfo.releaseYear}/>
            <p>rating</p>
@@ -35,11 +35,11 @@ const MovieForm = ({movieInfo = {}}) => {
            <p>runtime</p>
            <input type = "text" value = {movieInfo.runtime}/>
            </div>
-           <div class='description'>
+           <div className='description'>
            <p>description</p>
            <input type = "text-area" value = {movieInfo.description}/>
            </div>
-           <button class='confirmBtn'>Submit</button>
+           <button className='confirmBtn'>Submit</button>
          </div>
      )
 }

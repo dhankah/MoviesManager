@@ -10,12 +10,11 @@ test('renders value from props', () => {
 });
 
 test('calls onSelect on click', () => {
-    const targetValue = 'Release Date';
+    const targetValue = 'title';
 
     const mockOnChange = jest.fn();
-    const {getByTestId} = render(<SortControl currentSortOptionInput = 'Title' handleSelect = {mockOnChange}></SortControl>);
-
-    fireEvent.change(getByTestId('select'), { target: { value: targetValue } });
+    const {getByTestId} = render(<SortControl currentSortOptionInput = 'Release Date' handleSelect = {mockOnChange}></SortControl>);
+    fireEvent.change(getByTestId('select'), { target: { key: targetValue } });
 
     expect(mockOnChange).toHaveBeenNthCalledWith(1, targetValue);
   });

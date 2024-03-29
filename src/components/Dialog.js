@@ -4,7 +4,7 @@ import '../styles/Dialog.css';
 
 const Dialog = ({ onClose, title, children }) => {
   return ReactDOM.createPortal(
-    <div class = 'modal'>
+    <div className = 'modal'>
           <h2>{title}</h2>
           <button onClick={onClose}>Close</button>
           {children}
