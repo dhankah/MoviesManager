@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 import MovieTile from './MovieTile.js';
 
@@ -7,6 +7,7 @@ import '../styles/MoviesList.css';
 
 const MoviesList = ({movies}) => {
 
+  const location = useLocation();
 
      const splitMovieList = (movies, rowSize) => {
           const movieRows = [];
@@ -23,7 +24,7 @@ const MoviesList = ({movies}) => {
           {movieRows.map((row) => (
                <div>
                     {row.map((movie) => (
-                          <Link to={`${movie.id}`}>
+                          <Link to={`${movie.id}${location.search}`}>
                     <MovieTile 
                     props={movie}
                     />

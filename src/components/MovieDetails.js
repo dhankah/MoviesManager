@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useLocation } from 'react-router-dom';
 
 import '../styles/MovieDetails.css';
 import '../services/Fetch.js';
@@ -7,16 +7,15 @@ import Fetch from '../services/Fetch.js';
 
 
 const MovieDetails = () => {
+    const location = useLocation();
     
     const { movieId } = useParams();
     
+
     const [movie, setMovie] = useState(null);
 
-
     useEffect(() => {
-        console.log("not fetched");
         Fetch(`movies/${movieId}`).then(movieData => {
-            console.log("fetched");
             setMovie(movieData);
         }).catch(error => {
             console.error('Error fetching movie data:', error);
@@ -37,7 +36,7 @@ const MovieDetails = () => {
          <div class = 'detailsContainer'>
            <img src = {movie.poster_path} class = 'image' alt = 'Movie Poster'/>
            <div class = 'textFields'>
-            <Link to="/">
+            <Link to={`/${location.search}`}>
            <button>Back to search</button>
            </Link>
            <div class = 'caption'>

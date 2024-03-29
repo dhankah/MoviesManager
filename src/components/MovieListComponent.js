@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSearchParams, Outlet } from "react-router-dom";
 
 import Fetch from '../services/Fetch.js'
@@ -8,7 +8,6 @@ import SortControl from './SortControl.js'
 
 function MovieListComponent() {
     const [searchParams, setSearchParams] = useSearchParams();
-
     const [searchQuery, setSearchQuery] = useState('');
     const [searchResults, setSearchResults] = useState(null);
     const [sortCriterion, setSortCriterion] = useState('');
@@ -18,13 +17,9 @@ function MovieListComponent() {
 
 
 const initializeStateFromSearchParams = () => {
-  console.log(searchParams);
     const query = searchParams.get('searchQuery');
     const genre = searchParams.get('genre');
     const sortCriterion = searchParams.get('sortBy');
-
-
-    console.log("INITIALISING");
 
     if (query) {
       setSearchQuery(query);
@@ -53,19 +48,19 @@ const initializeStateFromSearchParams = () => {
 
     useEffect(() => {
       if (searchQuery !== '') {
-        fetchData2(`movies?search=${searchQuery}&searchBy=title&sortBy=${sortCriterion}&filter=${activeGenre}&sortOrder=asc`);
+        const genre = activeGenre === 'All' ? '' : activeGenre;
+        fetchData(`movies?search=${searchQuery}&searchBy=title&sortBy=${sortCriterion}&filter=${genre}&sortOrder=asc`);
       }
     
     }, [searchQuery]);
 
 
     useEffect(() => {
-      console.log("SORT");
       if (sortCriterion !== '') {
         const genre = activeGenre === 'All' ? '' : activeGenre;
         setSearchParams({ searchQuery: searchQuery, sortBy: sortCriterion, genre: activeGenre});
 
-        fetchData2(`movies?search=${searchQuery}&sortBy=${sortCriterion}&sortOrder=asc&filter=${genre}&searchBy=title`);
+        fetchData(`movies?search=${searchQuery}&sortBy=${sortCriterion}&sortOrder=asc&filter=${genre}&searchBy=title`);
       }
 
     }, [sortCriterion]);
@@ -77,20 +72,15 @@ const initializeStateFromSearchParams = () => {
     };
 
 
-    const fetchData2 = async (url) => {
+    const fetchData = async (url) => {
       const data = await Fetch(url);
       setSearchResults(data.data);
     }
 
     useEffect(() => {
-      console.log("GENRES")
-      if (activeGenre == 'All') {
-        fetchData2(`movies?search=${searchQuery}&sortBy=${sortCriterion}&searchBy=title&sortOrder=asc`);    
-        setSearchParams({ searchQuery: searchQuery, genre: activeGenre, sortBy: sortCriterion});
-      } else if (genres.includes(activeGenre)){
-        fetchData2(`movies?search=${searchQuery}&sortBy=${sortCriterion}&searchBy=title&sortOrder=asc&filter=${activeGenre}`);
-        setSearchParams({ searchQuery: searchQuery, genre: activeGenre, sortBy: sortCriterion});
-      } 
+        const genre = activeGenre === 'All' ? '' : activeGenre;
+        fetchData(`movies?search=${searchQuery}&sortBy=${sortCriterion}&searchBy=title&sortOrder=asc&filter=${genre}`);
+        setSearchParams({ searchQuery: searchQuery, genre: activeGenre, sortBy: sortCriterion}); 
 
     }, [activeGenre]);
 

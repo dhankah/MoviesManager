@@ -7,8 +7,7 @@ import reportWebVitals from './reportWebVitals';
 import {createBrowserRouter, RouterProvider} from 'react-router-dom'
 import MovieDetails from './components/MovieDetails.js';
 import Header from './components/Header.js';
-const router = createBrowserRouter([
-  {
+const router = createBrowserRouter([{
     path: "/",
     element: <MovieListComponent />,
     children: [{
@@ -18,8 +17,7 @@ const router = createBrowserRouter([
       path: "/",
       element: <Header/>
     }
-  ]
-  }
+  ]}
 ]);
 
 
