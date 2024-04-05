@@ -1,13 +1,21 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { useNavigate  } from 'react-router-dom';
 import '../styles/Dialog.css';
 
-const Dialog = ({ onClose, title, children }) => {
+const Dialog = ({ title, children }) => {
+  const navigate = useNavigate();
+  const onClose = () => {
+    navigate('/');
+  };
+
   return ReactDOM.createPortal(
-    <div className = 'modal'>
+    <div className = 'modal-overlay'>
+      <div className='modal'>
           <h2>{title}</h2>
           <button onClick={onClose}>Close</button>
-          {children}
+          <div>{children}</div>
+          </div>
     </div>,
     document.body
   );

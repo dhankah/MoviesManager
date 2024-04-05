@@ -16,7 +16,11 @@
     width: 200%;
 }
 
-p {
+.validation {
+  color: #BEBEBE;
+}
+
+label {
     color: #F65261;
     padding: 10px;
   }

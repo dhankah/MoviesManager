@@ -36,7 +36,10 @@ const MovieDetails = () => {
          <div className = 'detailsContainer'>
            <img src = {movie.poster_path} className = 'image' alt = 'Movie Poster'/>
            <div className = 'textFields'>
-            <Link to={`/${location.search}`}>
+            <Link to={`/${movieId}/edit`}>
+           <button>Edit</button>
+           </Link>
+           <Link to={`/${location.search}`}>
            <button>Back to search</button>
            </Link>
            <div className = 'caption'>

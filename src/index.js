@@ -7,6 +7,9 @@ import reportWebVitals from './reportWebVitals';
 import {createBrowserRouter, RouterProvider} from 'react-router-dom'
 import MovieDetails from './components/MovieDetails.js';
 import Header from './components/Header.js';
+import AddMovieComponent from './components/AddMovieComponent';
+import EditMovieComponent from './components/EditMovieComponent.js';
+
 const router = createBrowserRouter([{
     path: "/",
     element: <MovieListComponent />,
@@ -15,7 +18,15 @@ const router = createBrowserRouter([{
       element: <MovieDetails />
     }, {
       path: "/",
-      element: <Header/>
+      element: <Header/>,
+    },
+    {
+      path: "new",
+      element: <AddMovieComponent />
+    },
+    {
+      path: ":movieId/edit",
+      element: <EditMovieComponent />
     }
   ]}
 ]);
