@@ -11,7 +11,7 @@ const MovieForm = ({movieInfo = {}}) => {
     const genresList = ["Horror", "Drama"]
 
      return (
-         <div className = 'movieForm'>
+         <form className = 'movieForm'>
            <div className="column">
            <p>movieTitle</p>
            <input type = "text" value = {movieInfo.title}/>
@@ -39,8 +39,8 @@ const MovieForm = ({movieInfo = {}}) => {
            <p>description</p>
            <input type = "text-area" value = {movieInfo.description}/>
            </div>
-           <button className='confirmBtn'>Submit</button>
-         </div>
+           <button type='submit' className='confirmBtn'>Submit</button>
+         </form>
      )
 }
 

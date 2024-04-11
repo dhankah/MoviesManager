@@ -26,13 +26,10 @@ const MovieDetails = () => {
     const parseGenres = (genres) => {
         return genres.join(', ');
     }
-
-    
-    if (!movie) {
-        return <div>Loading...</div>;
-    }
-
+ 
      return (
+        <>
+        {movie ? 
          <div className = 'detailsContainer'>
            <img src = {movie.poster_path} className = 'image' alt = 'Movie Poster'/>
            <div className = 'textFields'>
@@ -51,6 +48,8 @@ const MovieDetails = () => {
            <p className ='overview'>{movie.overview}</p>
            </div>
          </div>
+          : <div>Loading...</div> }
+         </>
      )
 }
 

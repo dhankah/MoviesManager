@@ -6,64 +6,29 @@ import MoviesList from './MoviesList.js'
 import GenreSelectComponent from './GenreSelectComponent.js'
 import SortControl from './SortControl.js'
 
-function MovieListComponent() {
+const MovieListComponent = () => {
     const [searchParams, setSearchParams] = useSearchParams();
-    const [searchQuery, setSearchQuery] = useState('');
+    const [searchQuery, setSearchQuery] = useState(searchParams.get('searchQuery'));
     const [searchResults, setSearchResults] = useState(null);
-    const [sortCriterion, setSortCriterion] = useState('');
+    const [sortCriterion, setSortCriterion] = useState(searchParams.get('sortBy'));
     const genres = ['All', 'Documentary', 'Comedy', 'Horror', 'Crime'];
-    const [activeGenre, setActiveGenre] = useState('');
-
-
-
-const initializeStateFromSearchParams = () => {
-    const query = searchParams.get('searchQuery');
-    const genre = searchParams.get('genre');
-    const sortCriterion = searchParams.get('sortBy');
-
-    if (query) {
-      setSearchQuery(query);
-    }
-
-    if (genre) {
-      setActiveGenre(genre);
-    }
-
-    if (sortCriterion) {
-      setSortCriterion(sortCriterion);
-    }
-
-  };
+    const [activeGenre, setActiveGenre] = useState(searchParams.get('genre'));
 
     const handleSearchSubmit = (searchQueryFromInput) => {
         setSearchParams({ searchQuery: searchQueryFromInput});
         setSearchQuery(searchQueryFromInput);
         setActiveGenre('All');
-      };
-    
-
-    useEffect(() => {
-        initializeStateFromSearchParams();
-    }, []);
+      };    
 
     useEffect(() => {
       if (searchQuery !== '') {
         const genre = activeGenre === 'All' ? '' : activeGenre;
+        setSearchParams({ searchQuery: searchQuery, genre: activeGenre, sortBy: sortCriterion}); 
         fetchData(`movies?search=${searchQuery}&searchBy=title&sortBy=${sortCriterion}&filter=${genre}&sortOrder=asc`);
       }
     
-    }, [searchQuery]);
+    }, [searchQuery, sortCriterion, activeGenre]);
 
-
-    useEffect(() => {
-      if (sortCriterion !== '') {
-        const genre = activeGenre === 'All' ? '' : activeGenre;
-        setSearchParams({ searchQuery: searchQuery, sortBy: sortCriterion, genre: activeGenre});
-
-        fetchData(`movies?search=${searchQuery}&sortBy=${sortCriterion}&sortOrder=asc&filter=${genre}&searchBy=title`);
-      }
-
-    }, [sortCriterion]);
 
 
     const handleSortCriterionChange = (sortCriterion) => {
@@ -71,18 +36,10 @@ const initializeStateFromSearchParams = () => {
       setSortCriterion(sortCriterion);
     };
 
-
     const fetchData = async (url) => {
       const data = await Fetch(url);
       setSearchResults(data.data);
     }
-
-    useEffect(() => {
-        const genre = activeGenre === 'All' ? '' : activeGenre;
-        fetchData(`movies?search=${searchQuery}&sortBy=${sortCriterion}&searchBy=title&sortOrder=asc&filter=${genre}`);
-        setSearchParams({ searchQuery: searchQuery, genre: activeGenre, sortBy: sortCriterion}); 
-
-    }, [activeGenre]);
 
     const handleActiveGenreChange = (genre) => {
       setActiveGenre(genre);

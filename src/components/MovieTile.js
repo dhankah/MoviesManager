@@ -1,7 +1,7 @@
 import React from 'react';
 import '../styles/MovieTile.css';
 
-export default function MovieTile ({props}) {
+const MovieTile = ({props}) => {
   
 
   const parseReleaseYear = (releaseDate) => {
@@ -31,3 +31,5 @@ export default function MovieTile ({props}) {
 MovieTile.defaultProps = {
   title: "Movie Title"
 }
+
+export default MovieTile;
