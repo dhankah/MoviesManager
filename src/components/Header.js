@@ -2,8 +2,7 @@ import React from 'react';
 import SearchComponent from './SearchComponent.js';
 import '../styles/Header.css';
 
-const Header = ({searchQuery, onSearchSubmit}) => {
-    return (
+const Header = ({searchQuery, onSearchSubmit}) =>
         <div className='header'>
             <p className='siteTitle'>netflixroulette</p>
             <p className='searchLabel'>FIND YOUR MOVIE</p>
@@ -12,7 +11,5 @@ const Header = ({searchQuery, onSearchSubmit}) => {
                 onSearchSubmit={onSearchSubmit}  
             />
         </div>
-     )
-}
 
 export default Header;

@@ -21,7 +21,7 @@ const MovieForm = ({movieInfo = {}}) => {
 
            <p>genre</p>
            <select class = 'genreSelect' value={selectedGenre} data-testid='select' onChange={handleGenreChange}>
-           {genresList.map((genre) => (
+           {genresList && genresList.map((genre) => (
                  <option value={genre}
                  >{genre}</option>
              ))}

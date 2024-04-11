@@ -18,28 +18,12 @@ function MovieListComponent() {
     const handleSearchSubmit = (searchQuery) => {
         setSearchQuery(searchQuery);
       };
-    
-
-    useEffect(() => {
-        fetchData('http://localhost:4000/movies?limit=100'); 
-    }, []);
 
   useEffect(() => {
 
-    if (searchQuery !== '') {
-      fetchData(`http://localhost:4000/movies?search=${searchQuery}&searchBy=title`);
-    }
+    fetchData(`http://localhost:4000/movies?search=${searchQuery}&sortBy=${sortCriterion}&filterBy=${activeGenre}&sortOrder=asc&searchBy=title`);    
 
-  }, [searchQuery]);
-
-
-  useEffect(() => {
-
-    if (sortCriterion !== '') {
-      fetchData(`http://localhost:4000/movies?search=${searchQuery}&sortBy=${sortCriterion}&sortOrder=asc&searchBy=title`);
-    }
-
-  }, [sortCriterion]);
+  }, [searchQuery, sortCriterion, activeGenre]);
 
 
   const handleSortCriterionChange = (sortCriterion) => {
@@ -61,15 +45,6 @@ function MovieListComponent() {
     }
   };
 
-  useEffect(() => {
-   
-    if (activeGenre == 'All') {
-        fetchData(`http://localhost:4000/movies?search=${searchQuery}&searchBy=title`);    
-    } else {
-        fetchData(`http://localhost:4000/movies?search=${activeGenre}&searchBy=genres`);
-    }
-
-  }, [activeGenre]);
 
   const handleActiveGenreChange = (genre) => {
     setActiveGenre(genre);
