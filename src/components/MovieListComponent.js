@@ -64,8 +64,7 @@ const handleBackToSearch = (movie) => {
         {selectedMovie !== null ? (
                 <MovieDetails movie={selectedMovie} onButtonClick={handleBackToSearch}/>
             ) : (
-                <Header 
-                searchQuery={searchQuery} 
+                <Header
                 onSearchSubmit={handleSearchSubmit}  
                 />
             )}    

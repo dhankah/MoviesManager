@@ -1,13 +1,23 @@
 import React, {useState} from 'react';
 import '../styles/Search.css';
 
-const SearchComponent = ({searchQuery, onSearchSubmit}) => {
+const SearchComponent = ({onSearchSubmit}) => {
     const defaultValue = 'What do you want to watch';
-    const [searchText, setSearchText] = useState('');
 
-    const handleChange = (event) => {
-    setSearchText(event.target.value);
-  };
+    function debounce(func, delay) {
+      let debounceTimer;
+      return function() {
+        const context = this;
+        const args = arguments;
+        clearTimeout(debounceTimer);
+        debounceTimer = setTimeout(() => func.apply(context, args), delay);
+      };
+    }
+  
+    const handleChange = debounce((event) => {
+      const searchQuery = event.target.value;
+      handleSubmit(searchQuery);
+    }, 500);  
 
   const handleSearchOnEnter = (event) => {
     if (event.key === 'Enter') {
@@ -15,8 +25,8 @@ const SearchComponent = ({searchQuery, onSearchSubmit}) => {
     }
   };
 
-  const handleSubmit = () => {
-    onSearchSubmit(searchText, searchQuery);
+  const handleSubmit = (searchQuery) => {
+    onSearchSubmit(searchQuery);
   };
 
 
