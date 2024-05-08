@@ -2,7 +2,7 @@ import React from 'react';
 import '../styles/MovieTile.css';
 
 const MovieTile = ({props}) => {
-  
+
 
   const parseReleaseYear = (releaseDate) => {
     return releaseDate.substring(0, 4);
