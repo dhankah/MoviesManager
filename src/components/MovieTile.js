@@ -2,7 +2,7 @@ import React from 'react';
 import '../styles/MovieTile.css';
 
 export default function MovieTile ({props, onClick}) {
-  
+
   const handleTileClick = () => {
     onClick(props);
   };

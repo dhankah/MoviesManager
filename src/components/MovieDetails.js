@@ -18,7 +18,7 @@ const MovieDetails = ({movie, onButtonClick}) => {
            </div>
            <p class='genre'>{parseGenres(movie.genres)}</p>
            <div class = 'redCaptions'>
-           <p>{movie.release_date}</p> 
+           <p>{movie.release_date}</p>
            <p class = 'duration'>{movie.runtime} min</p>
            </div>
            <p class ='overview'>{movie.overview}</p>
