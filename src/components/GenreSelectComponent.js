@@ -10,8 +10,8 @@ const GenreSelectComponent = ({genresList, currentGenreInput, onSelect}) => {
 
      return (
             <ul>
-            {genresList && genresList.map((genre) => (
-                 <li key={genre}
+            {genresList.map((genre) => (
+                 <li key={genre} data-testid='genreOption'
                  style={{ fontWeight: genre === currentGenre ? 'bold' : 'normal' }}
                  onClick={() => handleSelect(genre)}
                  >{genre}</li>

@@ -1,80 +1,61 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
+import { useSearchParams, Outlet } from "react-router-dom";
 
-import Header from './Header.js'
+import Fetch from '../services/Fetch.js'
 import MoviesList from './MoviesList.js'
 import GenreSelectComponent from './GenreSelectComponent.js'
 import SortControl from './SortControl.js'
-import MovieDetails from './MovieDetails.js'
 
-function MovieListComponent() {
-    const [searchQuery, setSearchQuery] = useState('');
+const MovieListComponent = () => {
+    const [searchParams, setSearchParams] = useSearchParams();
+    const [searchQuery, setSearchQuery] = useState(searchParams.get('searchQuery'));
     const [searchResults, setSearchResults] = useState(null);
-    const [sortCriterion, setSortCriterion] = useState('');
-    const [activeGenre, setActiveGenre] = useState('');
-    const [selectedMovie, setSelectedMovie] = useState(null);
+    const [sortCriterion, setSortCriterion] = useState(searchParams.get('sortBy'));
     const genres = ['All', 'Documentary', 'Comedy', 'Horror', 'Crime'];
+    const [activeGenre, setActiveGenre] = useState(searchParams.get('genre'));
 
-
-    const handleSearchSubmit = (searchQuery) => {
-        setSearchQuery(searchQuery);
+    const handleSearchSubmit = (searchQueryFromInput) => {
+        setSearchParams({ searchQuery: searchQueryFromInput});
+        setSearchQuery(searchQueryFromInput);
+        setActiveGenre('All');
       };
 
-  useEffect(() => {
-
-    fetchData(`http://localhost:4000/movies?search=${searchQuery}&sortBy=${sortCriterion}&filterBy=${activeGenre}&sortOrder=asc&searchBy=title`);    
-
-  }, [searchQuery, sortCriterion, activeGenre]);
-
-
-  const handleSortCriterionChange = (sortCriterion) => {
-    setSortCriterion(sortCriterion);
-  };
-
-
-  const fetchData = async (url) => {
-    try {
-      const response = await fetch(url);
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
+    useEffect(() => {
+      if (searchQuery !== '') {
+        const genre = activeGenre === 'All' ? '' : activeGenre;
+        setSearchParams({ searchQuery: searchQuery, genre: activeGenre, sortBy: sortCriterion});
+        fetchData(`movies?search=${searchQuery}&searchBy=title&sortBy=${sortCriterion}&filter=${genre}&sortOrder=asc`);
       }
-      const data = await response.json();
 
+    }, [searchQuery, sortCriterion, activeGenre]);
+
+
+
+    const handleSortCriterionChange = (sortCriterion) => {
+
+      setSortCriterion(sortCriterion);
+    };
+
+    const fetchData = async (url) => {
+      const data = await Fetch(url);
       setSearchResults(data.data);
-    } catch (error) {
-      console.error('Error fetching search results:', error);
     }
-  };
 
+    const handleActiveGenreChange = (genre) => {
+      setActiveGenre(genre);
+    };
 
-  const handleActiveGenreChange = (genre) => {
-    setActiveGenre(genre);
-  };
-
-  const handleMovieClick = (movie) => {
-    const clickedResult = searchResults.find(result => result.id === movie.id);
-    setSelectedMovie(clickedResult);
-};
-
-const handleBackToSearch = (movie) => {  
-    setSelectedMovie(null);
-};
 
     return (
-        <div class='root'>    
-        {selectedMovie !== null ? (
-                <MovieDetails movie={selectedMovie} onButtonClick={handleBackToSearch}/>
-            ) : (
-                <Header
-                onSearchSubmit={handleSearchSubmit}  
-                />
-            )}    
-                
+        <div class='root' data-testid='movieList'>
+                <Outlet context={[searchQuery, handleSearchSubmit]} />
+
                 <SortControl currentSortOptionInput="Title" handleSelect={handleSortCriterionChange}></SortControl>
-                <GenreSelectComponent genresList={genres} currentGenreInput={activeGenre} onSelect={handleActiveGenreChange}></GenreSelectComponent>
+                <GenreSelectComponent genresList={genres} onSelect={handleActiveGenreChange}></GenreSelectComponent>
                 {searchResults !== null && (
                 <>
                  <p>{searchResults.length} movies found </p> 
-                 <MoviesList movies = {searchResults} onSelect = {handleMovieClick}></MoviesList>
+                 <MoviesList movies = {searchResults} ></MoviesList>
                 </>)}
         
         </div>

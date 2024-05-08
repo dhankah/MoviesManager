@@ -1,24 +1,26 @@
 import MovieTile from '../components/MovieTile.js';
-import { render, fireEvent } from '@testing-library/react';
+import { render } from '@testing-library/react';
 
 
-test('renders value from props', () => {
+const genres = ['Documentary', 'Comedy', 'Action']; 
+const parsedGenres = 'Documentary, Comedy, Action';
+const releaseYear = '2002';
+const movieTile = {
+  poster_path : '',
+  title: 'Good Movie',
+  release_date: '2002-11-04',
+  genres: genres
+}
+
+test('renders value from props and parsesThem', () => {
   const valueToRender = 'Good Movie';
-  const values = ['Documentary', 'Comedy', 'Horror', 'Crime'];  
-  const {getByText} = render(<MovieTile imageUrl = '' 
-  title = {valueToRender} releaseYear = '2003' genres = {values} onSelect = {() => console.log(movieName)}></MovieTile>);
+  const {getByText} = render(<MovieTile props={movieTile}/>);
   const renderedValue = getByText(valueToRender);
   expect(renderedValue).toBeInTheDocument();
+  const actualYear = getByText(releaseYear);
+  expect(actualYear).toBeInTheDocument();
+  const actualGenres = getByText(parsedGenres);
+  expect(actualGenres).toBeInTheDocument();
 });
 
-test('calls onSelect on click', () => {
-    const values = ['Documentary', 'Comedy', 'Horror', 'Crime'];
-    const mockOnChange = jest.fn();
 
-    const {getByTestId} = render(<MovieTile imageUrl = '' 
-    movieName = 'Movie' releaseYear = '2003' genres = {values} onSelect = {mockOnChange}></MovieTile>);
-
-    fireEvent.click(getByTestId('movie-tile'));
-
-    expect(mockOnChange).toHaveBeenCalled();
-  });

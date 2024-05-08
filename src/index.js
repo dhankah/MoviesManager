@@ -4,11 +4,27 @@ import './index.css';
 import MovieListComponent from './components/MovieListComponent.js'
 
 import reportWebVitals from './reportWebVitals';
+import {createBrowserRouter, RouterProvider} from 'react-router-dom'
+import MovieDetails from './components/MovieDetails.js';
+import Header from './components/Header.js';
+const router = createBrowserRouter([{
+    path: "/",
+    element: <MovieListComponent />,
+    children: [{
+      path: ":movieId",
+      element: <MovieDetails />
+    }, {
+      path: "/",
+      element: <Header/>
+    }
+  ]}
+]);
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <MovieListComponent />
+    <RouterProvider router={router} />
   </React.StrictMode>
 );
 
@@ -16,3 +32,5 @@ root.render(
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
+
+export default router;

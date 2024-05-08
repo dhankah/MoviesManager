@@ -1,9 +1,13 @@
 import React from 'react';
+import { Link, useLocation } from 'react-router-dom';
+
 import MovieTile from './MovieTile.js';
+
 import '../styles/MoviesList.css';
 
-const MoviesList = ({movies, onSelect}) => {
+const MoviesList = ({movies}) => {
 
+  const location = useLocation();
 
      const splitMovieList = (movies, rowSize) => {
           const movieRows = [];
@@ -20,13 +24,16 @@ const MoviesList = ({movies, onSelect}) => {
           {movieRows.map((row) => (
                <div>
                     {row.map((movie) => (
+                          <Link to={`${movie.id}${location.search}`}>
                     <MovieTile 
                     props={movie}
-                    onClick = {onSelect}/>
+                    />
+                      </Link>
                     ))}
                </div>
           ))}
           </>
+        
      )
 }
 

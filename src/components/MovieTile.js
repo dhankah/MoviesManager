@@ -1,11 +1,8 @@
 import React from 'react';
 import '../styles/MovieTile.css';
 
-export default function MovieTile ({props, onClick}) {
+const MovieTile = ({props}) => {
 
-  const handleTileClick = () => {
-    onClick(props);
-  };
 
   const parseReleaseYear = (releaseDate) => {
     return releaseDate.substring(0, 4);
@@ -15,19 +12,18 @@ export default function MovieTile ({props, onClick}) {
     return genres.join(', ');
 }
 
-
   return (
-       <div class = 'container' onClick={handleTileClick} data-testid='movie-tile'>
+       <div className = 'container' data-testid='movie-tile'>
           <img src = {props.poster_path} alt = 'Movie Poster'/>
           <br />
-          <div class = 'caption'>
-              <p class = 'movie'>{props.title}</p>
-              <div class = 'border'>
-                <p class = 'year'>{parseReleaseYear(props.release_date)}</p>
+          <div className = 'caption'>
+              <p className = 'movie'>{props.title}</p>
+              <div className = 'border'>
+                <p className = 'year'>{parseReleaseYear(props.release_date)}</p>
               </div>
            </div>
            <br />
-           <p class = 'genre'>{parseGenres(props.genres)}</p>
+           <p className = 'genre'>{parseGenres(props.genres)}</p>
         </div>
      )
 }
@@ -35,3 +31,5 @@ export default function MovieTile ({props, onClick}) {
 MovieTile.defaultProps = {
   title: "Movie Title"
 }
+
+export default MovieTile;
