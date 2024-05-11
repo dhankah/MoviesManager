@@ -6,8 +6,7 @@ const AddMovieComponent = () => {
     const title = 'ADD MOVIE';
     
      return (
-        <Dialog title={title} children={<MovieForm></MovieForm>}>
-        </Dialog>
+        <Dialog title={title} children={<MovieForm></MovieForm>}/>
      )
 }
 

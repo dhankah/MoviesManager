@@ -7,7 +7,7 @@ import '../styles/MoviesList.css';
 
 const MoviesList = ({movies}) => {
 
-  const location = useLocation();
+  const {search} = useLocation();
 
      const splitMovieList = (movies, rowSize) => {
           const movieRows = [];
@@ -24,7 +24,7 @@ const MoviesList = ({movies}) => {
           {movieRows.map((row) => (
                <div>
                     {row.map((movie) => (
-                          <Link to={`${movie.id}${location.search}`}>
+                          <Link to={`${movie.id}${search}`}>
                     <MovieTile 
                     props={movie}
                     />

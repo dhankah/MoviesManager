@@ -1,11 +1,9 @@
 import React, {useState} from 'react';
-import { useOutletContext } from "react-router-dom";
-
 import '../styles/Search.css';
 
 
-const SearchComponent = () => {
-    const [searchQuery, handleSearchSubmit] = useOutletContext();
+const SearchComponent = ({searchQuery, handleSearchSubmit}) => {
+
     const defaultValue = 'What do you want to watch';
     const [searchText, setSearchText] = useState('');
 

@@ -8,7 +8,7 @@ const MovieForm = ({ movieInfo }) => {
     console.log(movieInfo);
     const genresList = ['Documentary', 'Comedy', 'Horror', 'Crime'];
     const navigate = useNavigate ();
-    const location = useLocation();
+    const {pathname} = useLocation();
 
     const defaultInitialValues = {
         title: '',
@@ -49,7 +49,7 @@ const MovieForm = ({ movieInfo }) => {
       const onSubmit = async (values, { setSubmitting }) => {
         setSubmitting(true);
 
-        const method = location.pathname === '/new' ? 'POST' : 'PUT';
+        const method = pathname === '/new' ? 'POST' : 'PUT';
 
         try {
           const response = await fetch(`http://localhost:4000/movies`, {
@@ -83,7 +83,7 @@ const MovieForm = ({ movieInfo }) => {
         {({ values, errors, touched, handleChange, handleSubmit, isSubmitting }) => (
           <Form onSubmit={handleSubmit}>
             <div>
-              <label>Title</label>
+              <label for="title">Title</label>
               <input
                 type="text"
                 name="title"
@@ -93,7 +93,7 @@ const MovieForm = ({ movieInfo }) => {
               {errors.title && touched.title && <div className='validation'>{errors.title}</div>}
             </div>
             <div>
-              <label>URL</label>
+              <label for="poster_path">URL</label>
               <input
                 type="text"
                 name="poster_path"
@@ -103,7 +103,7 @@ const MovieForm = ({ movieInfo }) => {
               {errors.poster_path && touched.poster_path && <div className='validation'>{errors.poster_path}</div>}
             </div>
             <div>
-              <label>GENRE</label>
+              <label for="genres">GENRE</label>
               <select className='genreSelect' multiple={true} value={values.genres} onChange={handleChange} name="genres">
                 {genresList.map(genre => (
                   <option key={genre} value={genre}>{genre}</option>
@@ -112,7 +112,7 @@ const MovieForm = ({ movieInfo }) => {
               {errors.genres && touched.genres && <div className='validation'>{errors.genres}</div>}
             </div>
             <div>
-              <label>RELEASE DATE</label>
+              <label for="release_date">RELEASE DATE</label>
               <input
                 type="date"
                 name="release_date"
@@ -122,7 +122,7 @@ const MovieForm = ({ movieInfo }) => {
               {errors.release_date && touched.release_date && <div className='validation'>{errors.release_date}</div>}
             </div>
             <div>
-              <label>RATING</label>
+              <label for="vote_average">RATING</label>
               <input
                 type="number"
                 name="vote_average"
@@ -133,7 +133,7 @@ const MovieForm = ({ movieInfo }) => {
               {errors.vote_average && touched.postervote_average_path && <div className='validation'>{errors.vote_average}</div>}
             </div>
             <div>
-              <label>RUNTIME</label>
+              <label for="runtime">RUNTIME</label>
               <input
                 type="number"
                 name="runtime"
@@ -143,7 +143,7 @@ const MovieForm = ({ movieInfo }) => {
               {errors.runtime && touched.runtime && <div className='validation'>{errors.runtime}</div>}
             </div>
             <div>
-              <label>OVERVIEW</label>
+              <label for="overview">OVERVIEW</label>
               <input
                 type="textarea"
                 name="overview"

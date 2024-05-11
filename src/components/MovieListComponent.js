@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { useSearchParams, Outlet } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 
 import Fetch from '../services/Fetch.js'
 import MoviesList from './MoviesList.js'
 import GenreSelectComponent from './GenreSelectComponent.js'
 import SortControl from './SortControl.js'
+import Header from './Header.js'
 
 const MovieListComponent = () => {
     const [searchParams, setSearchParams] = useSearchParams();
@@ -48,7 +49,7 @@ const MovieListComponent = () => {
 
     return (
         <div class='root' data-testid='movieList'>
-                <Outlet context={[searchQuery, handleSearchSubmit]} />
+                <Header searchQuery={searchQuery} onSearchSubmit={handleSearchSubmit}/>
 
                 <SortControl currentSortOptionInput="Title" handleSelect={handleSortCriterionChange}></SortControl>
                 <GenreSelectComponent genresList={genres} onSelect={handleActiveGenreChange}></GenreSelectComponent>

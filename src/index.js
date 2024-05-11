@@ -6,7 +6,6 @@ import MovieListComponent from './components/MovieListComponent.js'
 import reportWebVitals from './reportWebVitals';
 import {createBrowserRouter, RouterProvider} from 'react-router-dom'
 import MovieDetails from './components/MovieDetails.js';
-import Header from './components/Header.js';
 import AddMovieComponent from './components/AddMovieComponent';
 import EditMovieComponent from './components/EditMovieComponent.js';
 
@@ -16,9 +15,6 @@ const router = createBrowserRouter([{
     children: [{
       path: ":movieId",
       element: <MovieDetails />
-    }, {
-      path: "/",
-      element: <Header/>,
     },
     {
       path: "new",
