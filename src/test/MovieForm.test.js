@@ -1,7 +1,7 @@
 import MovieForm from '../components/MovieForm.js';
 import { screen, render } from '@testing-library/react';
 
-var movieInfo = {
+const movieInfo = {
     title: "Scary Fog",
     url: "www.movie.com",
     genres: "Drama",
