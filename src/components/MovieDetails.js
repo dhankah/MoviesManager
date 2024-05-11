@@ -8,9 +8,9 @@ import Fetch from '../services/Fetch.js';
 
 const MovieDetails = () => {
     const location = useLocation();
-    
+
     const { movieId } = useParams();
-    
+
 
     const [movie, setMovie] = useState(null);
 
@@ -27,12 +27,9 @@ const MovieDetails = () => {
         return genres.join(', ');
     }
 
-    
-    if (!movie) {
-        return <div>Loading...</div>;
-    }
-
      return (
+        <>
+        {movie ?
          <div className = 'detailsContainer'>
            <img src = {movie.poster_path} className = 'image' alt = 'Movie Poster'/>
            <div className = 'textFields'>
@@ -48,12 +45,14 @@ const MovieDetails = () => {
            </div>
            <p className='genre'>{parseGenres(movie.genres)}</p>
            <div className = 'redCaptions'>
-           <p>{movie.release_date}</p> 
+           <p>{movie.release_date}</p>
            <p className = 'duration'>{movie.runtime} min</p>
            </div>
            <p className ='overview'>{movie.overview}</p>
            </div>
          </div>
+          : <div>Loading...</div> }
+         </>
      )
 }
 

@@ -18,12 +18,12 @@ const MovieForm = ({ movieInfo }) => {
         runtime: 0,
         overview: ''
       };
-      
+
       const initialValues = movieInfo || defaultInitialValues;
 
       const validate = values => {
         const errors = {};
-        
+
         if (!values.title) {
           errors.title = 'Required';
         }
@@ -32,25 +32,25 @@ const MovieForm = ({ movieInfo }) => {
         }
         if (!values.release_date) {
           errors.release_date = 'Required';
-        } 
+        }
         if (!values.overview) {
           errors.overview = 'Required';
         }
         if (values.rating < 0.1) {
             errors.rating = 'Should be a positive number';
         }
-            
+
         if (values.runtime < 1) {
             errors.runtime = 'Should be a positive number';
         }
         return errors;
       };
-      
+
       const onSubmit = async (values, { setSubmitting }) => {
         setSubmitting(true);
 
         const method = location.pathname === '/new' ? 'POST' : 'PUT';
-        
+
         try {
           const response = await fetch(`http://localhost:4000/movies`, {
             method: method,
