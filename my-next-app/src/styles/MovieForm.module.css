@@ -20,12 +20,12 @@
   color: #BEBEBE;
 }
 
-label {
+.redLabel {
     color: #F65261;
     padding: 10px;
   }
 
-input {
+.inputField {
     margin-top: 10px;
     opacity: 90%;
     width: 400px;
