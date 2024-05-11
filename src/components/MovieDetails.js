@@ -7,7 +7,7 @@ import Fetch from '../services/Fetch.js';
 
 
 const MovieDetails = () => {
-    const location = useLocation();
+    const {search} = useLocation();
 
     const { movieId } = useParams();
 
@@ -33,20 +33,23 @@ const MovieDetails = () => {
          <div className = 'detailsContainer'>
            <img src = {movie.poster_path} className = 'image' alt = 'Movie Poster'/>
            <div className = 'textFields'>
-            <Link to={`/${location.search}`}>
-           <button>Back to search</button>
-           </Link>
-           <div className = 'caption'>
-           <p className = 'name'>{movie.title}</p>
-           <p className='rating'> {movie.vote_average}</p>
-           </div>
-           <p className='genre'>{parseGenres(movie.genres)}</p>
-           <div className = 'redCaptions'>
-           <p>{movie.release_date}</p>
-           <p className = 'duration'>{movie.runtime} min</p>
-           </div>
-           <p className ='overview'>{movie.overview}</p>
-           </div>
+                <Link to={`/${movieId}/edit`} className='btn'>
+                Edit
+                </Link>
+                <Link to={`/${search}`} className='btn'>
+                Back to search
+                </Link>
+                <div className = 'caption'>
+                    <p className = 'name'>{movie.title}</p>
+                    <p className='rating'> {movie.vote_average}</p>
+                </div>
+                <p className='genre'>{parseGenres(movie.genres)}</p>
+                <div className = 'redCaptions'>
+                    <p>{movie.release_date}</p>
+                    <p className = 'duration'>{movie.runtime} min</p>
+                </div>
+                <p className ='overview'>{movie.overview}</p>
+            </div>
          </div>
           : <div>Loading...</div> }
          </>
